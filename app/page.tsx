@@ -1,65 +1,82 @@
-import Image from "next/image";
+import SidePanel from "@/components/SidePanel";
+import ActivityCard from "@/components/ActivityCard";
+import PromotionCard from "@/components/PromotionCard";
+import { getActivities, getPromotions } from "@/lib/wordpress";
+import {
+  getHomeFeaturedActivities,
+  getHomeFeaturedPromotions,
+} from "@/lib/home-filters";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const [allActivities, allPromotions] = await Promise.all([
+    getActivities(),
+    getPromotions(),
+  ]);
+
+  const activities = getHomeFeaturedActivities(allActivities, 2);
+  const promotions = getHomeFeaturedPromotions(allPromotions, 2);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col w-full">
+      <div className="max-w-[var(--max-width)] mx-auto px-4 py-12 w-full">
+        <div className="flex flex-col lg:flex-row gap-12">
+          <div className="w-full lg:w-1/4">
+            <SidePanel />
+          </div>
+
+          <div className="w-full lg:w-3/4 info-panel-container">
+            <section className="info-section">
+              <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-[var(--primary-light)] to-[var(--accent)]" />
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <span className="text-4xl text-[var(--primary)]">📅</span>
+                  最新活動
+                </h2>
+                <Link href="/activities" className="text-[var(--primary)] hover:underline font-bold">
+                  所有活動 →
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {activities.length > 0 ? (
+                  activities.map((activity) => (
+                    <ActivityCard key={activity.id} activity={activity} />
+                  ))
+                ) : (
+                  <p className="text-[var(--secondary)]/60 col-span-full">
+                    近半年內尚無活動，請至活動專區查看完整列表。
+                  </p>
+                )}
+              </div>
+            </section>
+
+            <section className="info-section">
+              <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-400 to-blue-600" />
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <span className="text-4xl text-[var(--accent)]">📜</span>
+                  最新文宣
+                </h2>
+                <Link href="/promotions" className="text-[var(--primary)] hover:underline font-bold">
+                  更多文宣 →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {promotions.length > 0 ? (
+                  promotions.map((promo) => (
+                    <PromotionCard key={promo.id} promotion={promo} />
+                  ))
+                ) : (
+                  <p className="text-[var(--secondary)]/60 col-span-full">
+                    近半年內尚無文宣，請至文宣專區查看完整列表。
+                  </p>
+                )}
+              </div>
+            </section>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
