@@ -38,10 +38,10 @@ alwaysApply: false
 
 1. 本輪假設
 2. 最小必要修改
-3. 執行驗證指令
-4. 結果摘要
-5. 若失敗，記錄錯誤原因
-6. 下一輪依新證據調整策略
+3. **委派 `verifier` subagent 執行本輪驗證**（lint、build、Goal Contract 對照）
+4. 依 verifier 報告撰寫結果摘要
+5. 若失敗，記錄錯誤原因至 `loop-failures.md`
+6. 下一輪依 verifier 證據調整策略
 
 ## Vegetaiwan 專案驗證指令
 

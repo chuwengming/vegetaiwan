@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const wordpressHost = process.env.WORDPRESS_HOST || "vege-taiwan.local";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/query": ["./knowledges/**/*"],
+  },
   images: {
     remotePatterns: [
       {

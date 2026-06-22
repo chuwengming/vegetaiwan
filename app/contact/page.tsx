@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import VegNewsQA from "@/components/VegNewsQA";
 import { getPageBySlug, getSiteContact } from "@/lib/wordpress";
 
 export default async function ContactPage() {
@@ -64,6 +65,8 @@ export default async function ContactPage() {
           <ContactForm />
         </div>
       </div>
+
+      <VegNewsQA />
     </div>
   );
 }
