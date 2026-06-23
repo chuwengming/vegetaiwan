@@ -14,10 +14,15 @@ interface QueryResponse {
   sources?: QuerySource[];
 }
 
-export default function VegNewsQA() {
+interface VegNewsQAProps {
+  layout?: "full" | "sidebar";
+}
+
+export default function VegNewsQA({ layout = "full" }: VegNewsQAProps) {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<QueryResponse | null>(null);
+  const isSidebar = layout === "sidebar";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,16 +52,17 @@ export default function VegNewsQA() {
   }
 
   return (
-    <section className="vegnews-qa mt-16 pt-16 border-t border-[var(--primary)]/10">
-      <header className="mb-8 text-center">
-        <p className="text-sm tracking-[0.3em] uppercase text-[var(--accent)] font-semibold mb-2">
-          Knowledge Base
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-3">
-          蔬食資訊 Q&A
-        </h2>
-        <p className="text-[var(--secondary)]/70 max-w-2xl mx-auto">
+    <section
+      className={`vegnews-qa ${isSidebar ? "vegnews-qa--sidebar" : "vegnews-qa--full"}`}
+    >
+      <header className={isSidebar ? "vegnews-qa-header-sidebar" : "vegnews-qa-header-full"}>
+        <p className="vegnews-qa-eyebrow">AI Knowledge Base</p>
+        <h2 className="vegnews-qa-title">蔬食資訊 Q&A</h2>
+        <p className="vegnews-qa-desc">
           依社團知識庫內容回答蔬食倡議、環保、活動等相關問題，並附參考來源。
+        </p>
+        <p className="vegnews-qa-patience" role="note">
+          AI 回應速度稍慢，請耐心等候！
         </p>
       </header>
 
@@ -69,22 +75,29 @@ export default function VegNewsQA() {
             id="vegnews-query"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="例如：什麼是全民蔬食運動？21天維根體驗營是什麼？"
-            rows={3}
+            placeholder="例如：什麼是全民蔬食運動？世界素食日是哪一天？"
+            rows={isSidebar ? 4 : 3}
             maxLength={500}
             className="vegnews-qa-input"
             disabled={loading}
           />
-          <div className="flex items-center justify-between gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4">
             <span className="text-sm text-[var(--secondary)]/50">
               {query.length}/500
             </span>
             <button
               type="submit"
               disabled={loading || !query.trim()}
-              className="vegnews-qa-submit"
+              className="vegnews-qa-submit w-full sm:w-auto"
             >
-              {loading ? "查詢知識庫中…" : "送出查詢"}
+              {loading ? (
+                <span className="inline-flex items-center gap-2">
+                  <LoadingSpinner />
+                  查詢中…
+                </span>
+              ) : (
+                "送出查詢"
+              )}
             </button>
           </div>
         </form>
@@ -97,7 +110,7 @@ export default function VegNewsQA() {
             {result.success && result.answer ? (
               <>
                 <div
-                  className="prose prose-lg max-w-none text-[var(--secondary)] vegnews-qa-answer"
+                  className="prose prose-sm md:prose-base max-w-none text-[var(--secondary)] vegnews-qa-answer"
                   dangerouslySetInnerHTML={{ __html: markdownToSimpleHtml(result.answer) }}
                 />
                 {result.sources && result.sources.length > 0 && (
@@ -125,10 +138,25 @@ export default function VegNewsQA() {
         )}
 
         <p className="vegnews-qa-disclaimer">
-          回答依知識庫內容由 AI 生成，僅供參考。如有疑問歡迎透過上方表單與我們聯繫。
+          回答依知識庫內容由 AI 生成，僅供參考。如有疑問歡迎來電或來信與我們聯繫。
         </p>
       </div>
     </section>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <svg
+      className="animate-spin h-4 w-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+    </svg>
   );
 }
 

@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "wp:about": "node --experimental-strip-types scripts/publish-about-page.mjs"
+    "wp:about": "node --experimental-strip-types scripts/publish-about-page.mjs",
+    "wp:contact": "node --experimental-strip-types scripts/publish-contact-page.mjs"
   },
   "dependencies": {
     "@apollo/client": "^4.1.6",

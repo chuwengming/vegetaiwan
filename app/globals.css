@@ -326,9 +326,122 @@
     @apply grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl mt-2;
   }
 
+  /* Contact Page */
+  .contact-page {
+    @apply bg-gradient-to-b from-[var(--bg-light)] via-white to-[var(--bg-light)];
+  }
+
+  .contact-page-header {
+    @apply text-center mb-12 md:mb-16 max-w-3xl mx-auto;
+  }
+
+  .contact-page-eyebrow {
+    @apply text-sm tracking-[0.35em] uppercase text-[var(--accent)] font-semibold mb-3;
+  }
+
+  .contact-page-title {
+    @apply text-4xl md:text-5xl font-bold text-[var(--primary)] mb-5;
+  }
+
+  .contact-page-lead {
+    @apply text-lg md:text-xl text-[var(--secondary)]/70 leading-relaxed;
+  }
+
+  .contact-page-intro {
+    @apply text-left md:text-center;
+  }
+
+  .contact-page-grid {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start;
+  }
+
+  .contact-info-panel {
+    @apply lg:col-span-5 space-y-6;
+  }
+
+  .contact-qa-panel {
+    @apply lg:col-span-7 lg:sticky lg:top-8;
+  }
+
+  .contact-info-card {
+    @apply bg-white rounded-3xl shadow-lg border border-[var(--primary)]/10 p-8 md:p-10;
+  }
+
+  .contact-info-heading {
+    @apply text-2xl font-bold text-[var(--primary)] mb-3;
+  }
+
+  .contact-info-desc {
+    @apply text-[var(--secondary)]/70 leading-relaxed mb-8 pb-8 border-b border-[var(--primary)]/10;
+  }
+
+  .contact-method-list {
+    @apply space-y-6;
+  }
+
+  .contact-method-item {
+    @apply flex items-start gap-4;
+  }
+
+  .contact-method-icon {
+    @apply shrink-0 w-12 h-12 rounded-2xl bg-[var(--primary)]/8 text-[var(--primary)] flex items-center justify-center;
+  }
+
+  .contact-method-label {
+    @apply text-sm font-semibold uppercase tracking-wide text-[var(--secondary)]/60 mb-1;
+  }
+
+  .contact-method-value {
+    @apply text-lg md:text-xl font-bold text-[var(--secondary)] hover:text-[var(--primary)] transition-colors break-all;
+  }
+
+  .contact-info-note {
+    @apply rounded-2xl bg-[var(--primary)]/5 border border-[var(--primary)]/10 px-6 py-5 text-sm text-[var(--secondary)]/75 leading-relaxed;
+  }
+
   /* VegNews Q&A */
+  .vegnews-qa--full {
+    @apply mt-16 pt-16 border-t border-[var(--primary)]/10;
+  }
+
+  .vegnews-qa--sidebar {
+    @apply h-full;
+  }
+
+  .vegnews-qa-header-full {
+    @apply mb-8 text-center;
+  }
+
+  .vegnews-qa-header-sidebar {
+    @apply mb-6;
+  }
+
+  .vegnews-qa-eyebrow {
+    @apply text-xs tracking-[0.25em] uppercase text-[var(--accent)] font-semibold mb-2;
+  }
+
+  .vegnews-qa-title {
+    @apply text-2xl md:text-3xl font-bold text-[var(--primary)] mb-2;
+  }
+
+  .vegnews-qa-desc {
+    @apply text-[var(--secondary)]/70 text-sm md:text-base leading-relaxed;
+  }
+
+  .vegnews-qa-patience {
+    @apply mt-3 inline-flex items-center gap-2 text-sm font-medium text-amber-800 bg-amber-50 border border-amber-200/80 rounded-full px-4 py-2;
+  }
+
+  .vegnews-qa-header-full .vegnews-qa-desc {
+    @apply max-w-2xl mx-auto;
+  }
+
   .vegnews-qa-card {
-    @apply bg-white rounded-[32px] shadow-xl border border-[var(--primary)]/10 p-6 md:p-10;
+    @apply bg-white rounded-3xl shadow-xl border border-[var(--primary)]/10 p-6 md:p-8;
+  }
+
+  .vegnews-qa--sidebar .vegnews-qa-card {
+    @apply shadow-lg ring-1 ring-[var(--primary)]/5;
   }
 
   .vegnews-qa-input {
@@ -356,7 +469,7 @@
   }
 
   .vegnews-qa-disclaimer {
-    @apply mt-6 text-sm text-[var(--secondary)]/50 text-center;
+    @apply mt-6 text-xs md:text-sm text-[var(--secondary)]/50 leading-relaxed;
   }
 
   .vegnews-qa-answer .wiki-link {
