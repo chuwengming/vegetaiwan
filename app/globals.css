@@ -178,6 +178,10 @@
     @apply bg-[#1877f2];
   }
 
+  .side-social-btn.yt {
+    @apply bg-[#ff0000];
+  }
+
   /* Cards */
   .activity-card,
   .promotion-card {
@@ -397,6 +401,22 @@
 
   .contact-info-note {
     @apply rounded-2xl bg-[var(--primary)]/5 border border-[var(--primary)]/10 px-6 py-5 text-sm text-[var(--secondary)]/75 leading-relaxed;
+  }
+
+  .contact-social-card {
+    @apply bg-white rounded-3xl shadow-lg border border-[var(--primary)]/10 p-6 md:p-8;
+  }
+
+  .contact-social-heading {
+    @apply text-lg font-bold text-[var(--primary)] mb-4;
+  }
+
+  .contact-social-list {
+    @apply space-y-3;
+  }
+
+  .contact-social-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--bg-light)] text-[var(--secondary)] font-medium hover:bg-[var(--primary)]/10 hover:text-[var(--primary)] transition-colors;
   }
 
   /* VegNews Q&A */

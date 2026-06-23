@@ -1,12 +1,11 @@
 import VegNewsQA from "@/components/VegNewsQA";
+import SocialLinks from "@/components/SocialLinks";
 import {
   CONTACT_PAGE_TITLE,
   CONTACT_PAGE_INTRO_HTML,
 } from "@/lib/contact-content";
+import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/site-contact";
 import { getPageBySlug } from "@/lib/wordpress";
-
-const CONTACT_PHONE = "0952415738";
-const CONTACT_EMAIL = "chuwmveg@gmail.com";
 
 export default async function ContactPage() {
   const page = await getPageBySlug("contact");
@@ -71,6 +70,8 @@ export default async function ContactPage() {
                 臺中市蔬食台灣促進會致力推動全民蔬食，若您對活動合作、媒體採訪或志工參與有興趣，歡迎隨時與我們聯繫。
               </p>
             </div>
+
+            <SocialLinks variant="contact" />
           </aside>
 
           <div className="contact-qa-panel">

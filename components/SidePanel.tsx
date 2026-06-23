@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SocialLinks from "@/components/SocialLinks";
 import { getActivities, getPromotions } from "@/lib/wordpress";
 import {
   getSidebarActivityList,
@@ -83,24 +84,7 @@ export default async function SidePanel() {
           <span className="side-section-icon">🌐</span>
           <h3 className="side-section-title">追蹤我們</h3>
         </div>
-        <div className="side-social">
-          <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="side-social-btn ig"
-          >
-            Instagram
-          </a>
-          <a
-            href="https://www.facebook.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="side-social-btn fb"
-          >
-            Facebook
-          </a>
-        </div>
+        <SocialLinks variant="sidebar" />
       </div>
     </aside>
   );
